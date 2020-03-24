@@ -2,7 +2,6 @@
 
 namespace Georanma\AmazonMwsService;
 
-use Georanma\AmazonMwsService\AmazonService\AmazonCore;
 use Georanma\AmazonMwsService\AmazonService\AmazonServiceStatus;
 use Illuminate\Support\ServiceProvider;
 
