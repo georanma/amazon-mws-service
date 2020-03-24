@@ -30,6 +30,11 @@ class AmazonCoreTest extends AmazonTestCase
             );
     }
 
+    protected function getPackageProviders($app)
+    {
+        return ['Georanma\AmazonMwsService\AmazonMwsServiceProvider'];
+    }
+
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
