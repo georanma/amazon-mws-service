@@ -2,6 +2,8 @@
 
 namespace Georanma\AmazonMwsService;
 
+use Georanma\AmazonMwsService\AmazonService\AmazonCore;
+use Georanma\AmazonMwsService\AmazonService\AmazonServiceStatus;
 use Illuminate\Support\ServiceProvider;
 
 class AmazonMwsServiceProvider extends ServiceProvider
@@ -32,6 +34,10 @@ class AmazonMwsServiceProvider extends ServiceProvider
         // Register the main class to use with the facade
         $this->app->singleton('amazon-mws-service', function () {
             return new AmazonMwsService;
+        });
+
+        $this->app->singleton('amazon-service-status', function(){
+            return new AmazonServiceStatus;
         });
     }
 }

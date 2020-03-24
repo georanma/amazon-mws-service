@@ -13,34 +13,13 @@ class AmazonCoreTest extends AmazonTestCase
 
     protected $object;
 
-    protected function getEnvironmentSetUp($app)
-    {
-        // Setup default database to use sqlite :memory:
-        $app['config']->set('amazon-mws.muteLog', 'Info');
-        $app['config']->set('amazon-mws.AMAZON_SERVICE_URL', 'http://localhost/');
-        $app['config']->set(
-            'amazon-mws.store', [
-            'testStore' => [
-                'merchantId' => 'ABC_MARKET_1234',
-                'marketplaceId' => 'ABC3456789456',
-                'keyId' => 'key',
-                'secretkey' => 'secret',
-            ],
-        ],
-            );
-    }
-
-    protected function getPackageProviders($app)
-    {
-        return ['Georanma\AmazonMwsService\AmazonMwsServiceProvider'];
-    }
-
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
     protected function setUp(): void
     {
+        parent::setUp();
         resetLog();
         $this->object = new AmazonServiceStatus('testStore', 'Inbound', true, null);
 
@@ -80,7 +59,6 @@ class AmazonCoreTest extends AmazonTestCase
         resetLog();
         $this->object->setMock($a, $b);
         $check = parseLog();
-        var_dump($check);
         if ((is_bool($a) && $a) || $b) {
             $this->assertEquals($c, $check[0]);
         }
