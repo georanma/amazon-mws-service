@@ -30,6 +30,15 @@ abstract class AmazonTestCase extends TestCase
         );
     }
 
+    /**
+     * @param  Application $app
+     * @return array
+     */
+    protected function getPackageProviders($app)
+    {
+        return ['Georanma\AmazonMwsService\AmazonMwsServiceProvider'];
+    }
+
 }
 
 require_once __DIR__ . '/helperFunctions.php';

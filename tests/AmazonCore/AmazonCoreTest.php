@@ -2,6 +2,7 @@
 
 namespace Georanma\AmazonMwsService\Tests;
 
+
 use Georanma\AmazonMwsService\AmazonService\AmazonServiceStatus;
 
 /**
@@ -10,9 +11,6 @@ use Georanma\AmazonMwsService\AmazonService\AmazonServiceStatus;
 class AmazonCoreTest extends AmazonTestCase
 {
 
-    /**
-     * @var AmazonServiceStatus
-     */
     protected $object;
 
     protected function getEnvironmentSetUp($app)
