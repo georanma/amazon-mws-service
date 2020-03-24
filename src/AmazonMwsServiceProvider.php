@@ -4,7 +4,7 @@ namespace Georanma\AmazonMwsService;
 
 use Illuminate\Support\ServiceProvider;
 
-class AmazonMwsServiceServiceProvider extends ServiceProvider
+class AmazonMwsServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
