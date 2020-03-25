@@ -1,12 +1,15 @@
 <?php
+
+namespace Georanma\AmazonMwsService\MerchantFulfillment;
+
 /*******************************************************************************
  * Copyright 2009-2020 Amazon Services. All Rights Reserved.
- * Licensed under the Apache License, Version 2.0 (the "License"); 
+ * Licensed under the Apache License, Version 2.0 (the "License");
  *
- * You may not use this file except in compliance with the License. 
+ * You may not use this file except in compliance with the License.
  * You may obtain a copy of the License at: http://aws.amazon.com/apache2.0
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR 
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the 
+ * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *******************************************************************************
  * PHP Version 5
@@ -17,8 +20,14 @@
  * Generated: Mon Mar 02 20:07:25 UTC 2020
  */
 
-interface  MWSMerchantFulfillmentService_Interface
+/**
+ *  @see MWSMerchantFulfillmentService_Interface
+ */
+require_once(dirname(__FILE__) . '/FulfillmentInterface.php');
+
+class MWSMerchantFulfillmentService_Mock implements MWSMerchantFulfillmentService_Interface
 {
+    // Public API ------------------------------------------------------------//
 
     /**
      * Cancel Shipment
@@ -26,13 +35,16 @@ interface  MWSMerchantFulfillmentService_Interface
      *     has not been cancelled already.
      *
      * @param mixed $request array of parameters for MWSMerchantFulfillmentService_Model_CancelShipment request or MWSMerchantFulfillmentService_Model_CancelShipment object itself
-     * @see MWSMerchantFulfillmentService_Model_CancelShipmentRequest
      * @return MWSMerchantFulfillmentService_Model_CancelShipmentResponse
      *
-     * @throws MWSMerchantFulfillmentService_Exception
+     * @throws FulfillmentException
+     *@see MWSMerchantFulfillmentService_Model_CancelShipment
      */
-    public function cancelShipment($request);
-
+    public function cancelShipment($request)
+    {
+        require_once (dirname(__FILE__) . '/Model/CancelShipmentResponse.php');
+        return MWSMerchantFulfillmentService_Model_CancelShipmentResponse::fromXML($this->_invoke('CancelShipment'));
+    }
 
     /**
      * Create Shipment
@@ -40,13 +52,16 @@ interface  MWSMerchantFulfillmentService_Interface
      *     shipping service or shipping service offering.
      *
      * @param mixed $request array of parameters for MWSMerchantFulfillmentService_Model_CreateShipment request or MWSMerchantFulfillmentService_Model_CreateShipment object itself
-     * @see MWSMerchantFulfillmentService_Model_CreateShipmentRequest
      * @return MWSMerchantFulfillmentService_Model_CreateShipmentResponse
      *
-     * @throws MWSMerchantFulfillmentService_Exception
+     * @throws FulfillmentException
+     *@see MWSMerchantFulfillmentService_Model_CreateShipment
      */
-    public function createShipment($request);
-
+    public function createShipment($request)
+    {
+        require_once (dirname(__FILE__) . '/Model/CreateShipmentResponse.php');
+        return MWSMerchantFulfillmentService_Model_CreateShipmentResponse::fromXML($this->_invoke('CreateShipment'));
+    }
 
     /**
      * Get Additional Seller Inputs
@@ -54,13 +69,16 @@ interface  MWSMerchantFulfillmentService_Interface
      *     Also returns any saved values the seller has for these additional inputs.
      *
      * @param mixed $request array of parameters for MWSMerchantFulfillmentService_Model_GetAdditionalSellerInputs request or MWSMerchantFulfillmentService_Model_GetAdditionalSellerInputs object itself
-     * @see MWSMerchantFulfillmentService_Model_GetAdditionalSellerInputsRequest
      * @return MWSMerchantFulfillmentService_Model_GetAdditionalSellerInputsResponse
      *
-     * @throws MWSMerchantFulfillmentService_Exception
+     * @throws FulfillmentException
+     *@see MWSMerchantFulfillmentService_Model_GetAdditionalSellerInputs
      */
-    public function getAdditionalSellerInputs($request);
-
+    public function getAdditionalSellerInputs($request)
+    {
+        require_once (dirname(__FILE__) . '/Model/GetAdditionalSellerInputsResponse.php');
+        return MWSMerchantFulfillmentService_Model_GetAdditionalSellerInputsResponse::fromXML($this->_invoke('GetAdditionalSellerInputs'));
+    }
 
     /**
      * Get Eligible Shipping Services
@@ -69,37 +87,54 @@ interface  MWSMerchantFulfillmentService_Interface
      *     respectively.  A list of carriers that are temporarily unavailable is also returned.
      *
      * @param mixed $request array of parameters for MWSMerchantFulfillmentService_Model_GetEligibleShippingServices request or MWSMerchantFulfillmentService_Model_GetEligibleShippingServices object itself
-     * @see MWSMerchantFulfillmentService_Model_GetEligibleShippingServicesRequest
      * @return MWSMerchantFulfillmentService_Model_GetEligibleShippingServicesResponse
      *
-     * @throws MWSMerchantFulfillmentService_Exception
+     * @throws FulfillmentException
+     *@see MWSMerchantFulfillmentService_Model_GetEligibleShippingServices
      */
-    public function getEligibleShippingServices($request);
-
+    public function getEligibleShippingServices($request)
+    {
+        require_once (dirname(__FILE__) . '/Model/GetEligibleShippingServicesResponse.php');
+        return MWSMerchantFulfillmentService_Model_GetEligibleShippingServicesResponse::fromXML($this->_invoke('GetEligibleShippingServices'));
+    }
 
     /**
      * Get Shipment
      * Gets an existing shipment, including the label status, label content, shipping information.
      *
      * @param mixed $request array of parameters for MWSMerchantFulfillmentService_Model_GetShipment request or MWSMerchantFulfillmentService_Model_GetShipment object itself
-     * @see MWSMerchantFulfillmentService_Model_GetShipmentRequest
      * @return MWSMerchantFulfillmentService_Model_GetShipmentResponse
      *
-     * @throws MWSMerchantFulfillmentService_Exception
+     * @throws FulfillmentException
+     *@see MWSMerchantFulfillmentService_Model_GetShipment
      */
-    public function getShipment($request);
-
+    public function getShipment($request)
+    {
+        require_once (dirname(__FILE__) . '/Model/GetShipmentResponse.php');
+        return MWSMerchantFulfillmentService_Model_GetShipmentResponse::fromXML($this->_invoke('GetShipment'));
+    }
 
     /**
      * Get Service Status
-     * 
+     *
      *
      * @param mixed $request array of parameters for MWSMerchantFulfillmentService_Model_GetServiceStatus request or MWSMerchantFulfillmentService_Model_GetServiceStatus object itself
-     * @see MWSMerchantFulfillmentService_Model_GetServiceStatusRequest
      * @return MWSMerchantFulfillmentService_Model_GetServiceStatusResponse
      *
-     * @throws MWSMerchantFulfillmentService_Exception
+     * @throws FulfillmentException
+     *@see MWSMerchantFulfillmentService_Model_GetServiceStatus
      */
-    public function getServiceStatus($request);
+    public function getServiceStatus($request)
+    {
+        require_once (dirname(__FILE__) . '/Model/GetServiceStatusResponse.php');
+        return MWSMerchantFulfillmentService_Model_GetServiceStatusResponse::fromXML($this->_invoke('GetServiceStatus'));
+    }
+
+    // Private API ------------------------------------------------------------//
+
+    private function _invoke($actionName)
+    {
+        return $xml = file_get_contents(dirname(__FILE__) . '/Mock/' . $actionName . 'Response.xml', /** search include path */ TRUE);
+    }
 
 }

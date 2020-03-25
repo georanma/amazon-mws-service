@@ -1,12 +1,12 @@
 <?php
 /*******************************************************************************
  * Copyright 2009-2020 Amazon Services. All Rights Reserved.
- * Licensed under the Apache License, Version 2.0 (the "License"); 
+ * Licensed under the Apache License, Version 2.0 (the "License");
  *
- * You may not use this file except in compliance with the License. 
+ * You may not use this file except in compliance with the License.
  * You may obtain a copy of the License at: http://aws.amazon.com/apache2.0
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR 
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the 
+ * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *******************************************************************************
  * PHP Version 5
@@ -21,15 +21,15 @@
  *  @see MWSMerchantFulfillmentService_Model
  */
 
-require_once (dirname(__FILE__) . '/../Model.php');
+require_once(dirname(__FILE__) . '/../FulfillmentModel.php');
 
 
 /**
  * MWSMerchantFulfillmentService_Model_GetServiceStatusResponse
- * 
+ *
  * Properties:
  * <ul>
- * 
+ *
  * <li>GetServiceStatusResult: MWSMerchantFulfillmentService_Model_GetServiceStatusResult</li>
  * <li>ResponseMetadata: MWSMerchantFulfillmentService_Model_ResponseMetadata</li>
  * <li>ResponseHeaderMetadata: MWSMerchantFulfillmentService_Model_ResponseHeaderMetadata</li>
@@ -188,11 +188,11 @@ require_once (dirname(__FILE__) . '/../Model.php');
     }
     /**
      * Construct MWSMerchantFulfillmentService_Model_GetServiceStatusResponse from XML string
-     * 
+     *
      * @param $xml
      *        XML string to construct from
      *
-     * @return MWSMerchantFulfillmentService_Model_GetServiceStatusResponse 
+     * @return MWSMerchantFulfillmentService_Model_GetServiceStatusResponse
      */
     public static function fromXML($xml)
     {
@@ -201,7 +201,7 @@ require_once (dirname(__FILE__) . '/../Model.php');
         $xpath = new DOMXPath($dom);
         $response = $xpath->query("//*[local-name()='GetServiceStatusResponse']");
         if ($response->length == 1) {
-            return new MWSMerchantFulfillmentService_Model_GetServiceStatusResponse(($response->item(0))); 
+            return new MWSMerchantFulfillmentService_Model_GetServiceStatusResponse(($response->item(0)));
         } else {
             throw new Exception ("Unable to construct MWSMerchantFulfillmentService_Model_GetServiceStatusResponse from provided XML. 
                                   Make sure that GetServiceStatusResponse is a root element");
@@ -209,10 +209,10 @@ require_once (dirname(__FILE__) . '/../Model.php');
     }
     /**
      * XML Representation for this object
-     * 
+     *
      * @return string XML for this object
      */
-    public function toXML() 
+    public function toXML()
     {
         $xml = "";
         $xml .= "<GetServiceStatusResponse xmlns=\"https://mws.amazonservices.com/MerchantFulfillment/2015-06-01\">";
