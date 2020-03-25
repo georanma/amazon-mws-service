@@ -17,7 +17,7 @@ composer require georanma/amazon-mws-service
 
 To publish the config for laravel projects:
 ```bash
-php artisan vendor:publish --provider="Georanma\AmazonMwsService\AmazonMwsServiceProvider" --tag="config"
+php artisan vendor:publish --provider="AmazonMwsService\AmazonMwsServiceProvider" --tag="config"
 ```
 
 

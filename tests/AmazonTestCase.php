@@ -41,4 +41,3 @@ abstract class AmazonTestCase extends TestCase
 
 }
 
-require_once __DIR__ . '/helperFunctions.php';

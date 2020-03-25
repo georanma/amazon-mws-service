@@ -11,8 +11,9 @@ return [
             'keyId' => '',
             'secretKey' => '',
             'authToken' => '',
-            'amazonServiceUrl' => 'https://mws-eu.amazonservices.com/',
-            /** Optional settings for SOCKS5 proxy
+            'amazonServiceUrl' => 'https://mws.amazonservices.com/',
+            /**
+             * Optional settings for SOCKS5 proxy
              *
             'proxy_info' => [
             'ip' => '127.0.0.1',
@@ -22,9 +23,8 @@ return [
              */
         ]
     ],
-
-    // Default service URL
-    'AMAZON_SERVICE_URL' => 'https://mws.amazonservices.com/',
-
+    'endpoint_release_date' => [
+        'MerchantFulfillment' => '2015-06-01'
+    ],
     'muteLog' => false
 ];
