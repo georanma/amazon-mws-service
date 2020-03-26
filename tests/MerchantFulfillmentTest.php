@@ -3,13 +3,13 @@
 namespace Georanma\AmazonMwsService\Tests;
 
 use Georanma\AmazonMwsService\MerchantFulfillment\Fulfillment_Client;
+use Georanma\AmazonMwsService\MerchantFulfillment\FulfillmentClient;
 use Illuminate\Foundation\Application;
 use Orchestra\Testbench\TestCase;
 
 
 class MerchantFulfillmentTest extends TestCase
 {
-
     /**
      * @param  Application $app
      * @return array
@@ -27,18 +27,17 @@ class MerchantFulfillmentTest extends TestCase
 
     /**
      * @test
-     * @return boolean
+     * @return void
      */
     public function it_populate_expected_services()
     {
-        return $this->assertTrue($this->app->bound('fulfillment'));
+        $this->assertTrue($this->app->bound('fulfillment'));
     }
 
     /** @test */
     public function it_creates_instance_of_merchant_fulfillment_client()
     {
-        $client = $this->app->make('fulfillment');
-        dd($client);
-        $this->assertInstanceOf(Fulfillment_Client::class, $client);
+        $client = $this->app->makeWith('fulfillment', ['id' => 1]);
+        $this->assertInstanceOf(FulfillmentClient::class, $client);
     }
 }

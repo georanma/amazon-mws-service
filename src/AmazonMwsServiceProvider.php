@@ -2,7 +2,7 @@
 
 namespace Georanma\AmazonMwsService;
 
-use Georanma\AmazonMwsService\MerchantFulfillment\Client;
+use Georanma\AmazonMwsService\MerchantFulfillment\FulfillmentClient;
 use Illuminate\Support\ServiceProvider;
 
 class AmazonMwsServiceProvider extends ServiceProvider
@@ -28,26 +28,15 @@ class AmazonMwsServiceProvider extends ServiceProvider
     /**
      * Register the application services.
      */
-    public function register()
+    public function register( )
     {
         // Automatically apply the package configuration
         $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'amazon-mws-service');
 
-        $this->app->singleton(
+        $this->app->bind(
             'fulfillment', function () {
-                dd(new Client());
+                return new FulfillmentClient;
             }
         );
-
-    }
-
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return ['fulfillment'];
     }
 }

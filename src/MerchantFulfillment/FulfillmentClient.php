@@ -3,6 +3,7 @@
 namespace Georanma\AmazonMwsService\MerchantFulfillment;
 
 use Georanma\AmazonMwsService\MerchantFulfillment\FulfillmentException;
+use \InvalidArgumentException;
 
 /*******************************************************************************
  * Copyright 2009-2020 Amazon Services. All Rights Reserved.
@@ -13,8 +14,9 @@ use Georanma\AmazonMwsService\MerchantFulfillment\FulfillmentException;
  * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
- *******************************************************************************
+ * ******************************************************************************
  * PHP Version 5
+ *
  * @category Amazon
  * @package  MWS Merchant Fulfillment Service
  * @version  2015-06-01
@@ -25,7 +27,6 @@ use Georanma\AmazonMwsService\MerchantFulfillment\FulfillmentException;
 
 /**
  * FulfillmentClient is an implementation of MWSMerchantFulfillmentService
- *
  */
 class FulfillmentClient implements FulfillmentInterface
 {
@@ -33,13 +34,19 @@ class FulfillmentClient implements FulfillmentInterface
     const SERVICE_VERSION = '2015-06-01';
     const MWS_CLIENT_VERSION = '2020-02-06';
 
-    /** @var string */
+    /**
+     * @var string
+     */
     private  $_awsAccessKeyId = null;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     private  $_awsSecretAccessKey = null;
 
-    /** @var array */
+    /**
+     * @var array
+     */
     private  $_config = array ('ServiceURL' => null,
                                'UserAgent' => 'MWSMerchantFulfillmentService PHP5 Library',
                                'SignatureVersion' => 2,
@@ -58,23 +65,23 @@ class FulfillmentClient implements FulfillmentInterface
      * Cancels an existing shipment.  This will only succeed if the cancellation window has not passed and if the shipment
      *     has not been cancelled already.
      *
-     * @param mixed $request array of parameters for MWSMerchantFulfillmentService_Model_CancelShipment request or MWSMerchantFulfillmentService_Model_CancelShipment object itself
+     * @param  mixed $request array of parameters for MWSMerchantFulfillmentService_Model_CancelShipment request or MWSMerchantFulfillmentService_Model_CancelShipment object itself
      * @return MWSMerchantFulfillmentService_Model_CancelShipmentResponse
      *
      * @throws FulfillmentException
-     *@see MWSMerchantFulfillmentService_Model_CancelShipmentRequest
+     * @see    MWSMerchantFulfillmentService_Model_CancelShipmentRequest
      */
     public function cancelShipment($request)
     {
         if (!($request instanceof MWSMerchantFulfillmentService_Model_CancelShipmentRequest)) {
-            require_once (dirname(__FILE__) . '/Model/CancelShipmentRequest.php');
+            include_once dirname(__FILE__) . '/Model/CancelShipmentRequest.php';
             $request = new MWSMerchantFulfillmentService_Model_CancelShipmentRequest($request);
         }
         $parameters = $request->toQueryParameterArray();
         $parameters['Action'] = 'CancelShipment';
         $httpResponse = $this->_invoke($parameters);
 
-        require_once (dirname(__FILE__) . '/Model/CancelShipmentResponse.php');
+        include_once dirname(__FILE__) . '/Model/CancelShipmentResponse.php';
         $response = MWSMerchantFulfillmentService_Model_CancelShipmentResponse::fromXML($httpResponse['ResponseBody']);
         $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
         return $response;
@@ -84,7 +91,8 @@ class FulfillmentClient implements FulfillmentInterface
     /**
      * Convert CancelShipmentRequest to name value pairs
      */
-    private function _convertCancelShipment($request) {
+    private function _convertCancelShipment($request)
+    {
 
         $parameters = array();
         $parameters['Action'] = 'CancelShipment';
@@ -107,23 +115,23 @@ class FulfillmentClient implements FulfillmentInterface
      * Creates a shipment for the shipping information specified.  Purchases and returns a label for the specified
      *     shipping service or shipping service offering.
      *
-     * @param mixed $request array of parameters for MWSMerchantFulfillmentService_Model_CreateShipment request or MWSMerchantFulfillmentService_Model_CreateShipment object itself
+     * @param  mixed $request array of parameters for MWSMerchantFulfillmentService_Model_CreateShipment request or MWSMerchantFulfillmentService_Model_CreateShipment object itself
      * @return MWSMerchantFulfillmentService_Model_CreateShipmentResponse
      *
      * @throws FulfillmentException
-     *@see MWSMerchantFulfillmentService_Model_CreateShipmentRequest
+     * @see    MWSMerchantFulfillmentService_Model_CreateShipmentRequest
      */
     public function createShipment($request)
     {
         if (!($request instanceof MWSMerchantFulfillmentService_Model_CreateShipmentRequest)) {
-            require_once (dirname(__FILE__) . '/Model/CreateShipmentRequest.php');
+            include_once dirname(__FILE__) . '/Model/CreateShipmentRequest.php';
             $request = new MWSMerchantFulfillmentService_Model_CreateShipmentRequest($request);
         }
         $parameters = $request->toQueryParameterArray();
         $parameters['Action'] = 'CreateShipment';
         $httpResponse = $this->_invoke($parameters);
 
-        require_once (dirname(__FILE__) . '/Model/CreateShipmentResponse.php');
+        include_once dirname(__FILE__) . '/Model/CreateShipmentResponse.php';
         $response = MWSMerchantFulfillmentService_Model_CreateShipmentResponse::fromXML($httpResponse['ResponseBody']);
         $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
         return $response;
@@ -133,7 +141,8 @@ class FulfillmentClient implements FulfillmentInterface
     /**
      * Convert CreateShipmentRequest to name value pairs
      */
-    private function _convertCreateShipment($request) {
+    private function _convertCreateShipment($request)
+    {
 
         $parameters = array();
         $parameters['Action'] = 'CreateShipment';
@@ -177,23 +186,23 @@ class FulfillmentClient implements FulfillmentInterface
      * Gets the list of additional seller inputs required for a ship-method.
      *     Also returns any saved values the seller has for these additional inputs.
      *
-     * @param mixed $request array of parameters for MWSMerchantFulfillmentService_Model_GetAdditionalSellerInputs request or MWSMerchantFulfillmentService_Model_GetAdditionalSellerInputs object itself
+     * @param  mixed $request array of parameters for MWSMerchantFulfillmentService_Model_GetAdditionalSellerInputs request or MWSMerchantFulfillmentService_Model_GetAdditionalSellerInputs object itself
      * @return MWSMerchantFulfillmentService_Model_GetAdditionalSellerInputsResponse
      *
      * @throws FulfillmentException
-     *@see MWSMerchantFulfillmentService_Model_GetAdditionalSellerInputsRequest
+     * @see    MWSMerchantFulfillmentService_Model_GetAdditionalSellerInputsRequest
      */
     public function getAdditionalSellerInputs($request)
     {
         if (!($request instanceof MWSMerchantFulfillmentService_Model_GetAdditionalSellerInputsRequest)) {
-            require_once (dirname(__FILE__) . '/Model/GetAdditionalSellerInputsRequest.php');
+            include_once dirname(__FILE__) . '/Model/GetAdditionalSellerInputsRequest.php';
             $request = new MWSMerchantFulfillmentService_Model_GetAdditionalSellerInputsRequest($request);
         }
         $parameters = $request->toQueryParameterArray();
         $parameters['Action'] = 'GetAdditionalSellerInputs';
         $httpResponse = $this->_invoke($parameters);
 
-        require_once (dirname(__FILE__) . '/Model/GetAdditionalSellerInputsResponse.php');
+        include_once dirname(__FILE__) . '/Model/GetAdditionalSellerInputsResponse.php';
         $response = MWSMerchantFulfillmentService_Model_GetAdditionalSellerInputsResponse::fromXML($httpResponse['ResponseBody']);
         $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
         return $response;
@@ -203,7 +212,8 @@ class FulfillmentClient implements FulfillmentInterface
     /**
      * Convert GetAdditionalSellerInputsRequest to name value pairs
      */
-    private function _convertGetAdditionalSellerInputs($request) {
+    private function _convertGetAdditionalSellerInputs($request)
+    {
 
         $parameters = array();
         $parameters['Action'] = 'GetAdditionalSellerInputs';
@@ -236,23 +246,23 @@ class FulfillmentClient implements FulfillmentInterface
      *     ShippingServiceOfferingId can be used in CreateShipment to specify the shipping service or the specific offer
      *     respectively.  A list of carriers that are temporarily unavailable is also returned.
      *
-     * @param mixed $request array of parameters for MWSMerchantFulfillmentService_Model_GetEligibleShippingServices request or MWSMerchantFulfillmentService_Model_GetEligibleShippingServices object itself
+     * @param  mixed $request array of parameters for MWSMerchantFulfillmentService_Model_GetEligibleShippingServices request or MWSMerchantFulfillmentService_Model_GetEligibleShippingServices object itself
      * @return MWSMerchantFulfillmentService_Model_GetEligibleShippingServicesResponse
      *
      * @throws FulfillmentException
-     *@see MWSMerchantFulfillmentService_Model_GetEligibleShippingServicesRequest
+     * @see    MWSMerchantFulfillmentService_Model_GetEligibleShippingServicesRequest
      */
     public function getEligibleShippingServices($request)
     {
         if (!($request instanceof MWSMerchantFulfillmentService_Model_GetEligibleShippingServicesRequest)) {
-            require_once (dirname(__FILE__) . '/Model/GetEligibleShippingServicesRequest.php');
+            include_once dirname(__FILE__) . '/Model/GetEligibleShippingServicesRequest.php';
             $request = new MWSMerchantFulfillmentService_Model_GetEligibleShippingServicesRequest($request);
         }
         $parameters = $request->toQueryParameterArray();
         $parameters['Action'] = 'GetEligibleShippingServices';
         $httpResponse = $this->_invoke($parameters);
 
-        require_once (dirname(__FILE__) . '/Model/GetEligibleShippingServicesResponse.php');
+        include_once dirname(__FILE__) . '/Model/GetEligibleShippingServicesResponse.php';
         $response = MWSMerchantFulfillmentService_Model_GetEligibleShippingServicesResponse::fromXML($httpResponse['ResponseBody']);
         $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
         return $response;
@@ -262,7 +272,8 @@ class FulfillmentClient implements FulfillmentInterface
     /**
      * Convert GetEligibleShippingServicesRequest to name value pairs
      */
-    private function _convertGetEligibleShippingServices($request) {
+    private function _convertGetEligibleShippingServices($request)
+    {
 
         $parameters = array();
         $parameters['Action'] = 'GetEligibleShippingServices';
@@ -293,23 +304,23 @@ class FulfillmentClient implements FulfillmentInterface
      * Get Shipment
      * Gets an existing shipment, including the label status, label content, shipping information.
      *
-     * @param mixed $request array of parameters for MWSMerchantFulfillmentService_Model_GetShipment request or MWSMerchantFulfillmentService_Model_GetShipment object itself
+     * @param  mixed $request array of parameters for MWSMerchantFulfillmentService_Model_GetShipment request or MWSMerchantFulfillmentService_Model_GetShipment object itself
      * @return MWSMerchantFulfillmentService_Model_GetShipmentResponse
      *
      * @throws FulfillmentException
-     *@see MWSMerchantFulfillmentService_Model_GetShipmentRequest
+     * @see    MWSMerchantFulfillmentService_Model_GetShipmentRequest
      */
     public function getShipment($request)
     {
         if (!($request instanceof MWSMerchantFulfillmentService_Model_GetShipmentRequest)) {
-            require_once (dirname(__FILE__) . '/Model/GetShipmentRequest.php');
+            include_once dirname(__FILE__) . '/Model/GetShipmentRequest.php';
             $request = new MWSMerchantFulfillmentService_Model_GetShipmentRequest($request);
         }
         $parameters = $request->toQueryParameterArray();
         $parameters['Action'] = 'GetShipment';
         $httpResponse = $this->_invoke($parameters);
 
-        require_once (dirname(__FILE__) . '/Model/GetShipmentResponse.php');
+        include_once dirname(__FILE__) . '/Model/GetShipmentResponse.php';
         $response = MWSMerchantFulfillmentService_Model_GetShipmentResponse::fromXML($httpResponse['ResponseBody']);
         $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
         return $response;
@@ -319,7 +330,8 @@ class FulfillmentClient implements FulfillmentInterface
     /**
      * Convert GetShipmentRequest to name value pairs
      */
-    private function _convertGetShipment($request) {
+    private function _convertGetShipment($request)
+    {
 
         $parameters = array();
         $parameters['Action'] = 'GetShipment';
@@ -340,24 +352,23 @@ class FulfillmentClient implements FulfillmentInterface
     /**
      * Get Service Status
      *
-     *
-     * @param mixed $request array of parameters for MWSMerchantFulfillmentService_Model_GetServiceStatus request or MWSMerchantFulfillmentService_Model_GetServiceStatus object itself
+     * @param  mixed $request array of parameters for MWSMerchantFulfillmentService_Model_GetServiceStatus request or MWSMerchantFulfillmentService_Model_GetServiceStatus object itself
      * @return MWSMerchantFulfillmentService_Model_GetServiceStatusResponse
      *
      * @throws FulfillmentException
-     *@see MWSMerchantFulfillmentService_Model_GetServiceStatusRequest
+     * @see    MWSMerchantFulfillmentService_Model_GetServiceStatusRequest
      */
     public function getServiceStatus($request)
     {
         if (!($request instanceof MWSMerchantFulfillmentService_Model_GetServiceStatusRequest)) {
-            require_once (dirname(__FILE__) . '/Model/GetServiceStatusRequest.php');
+            include_once dirname(__FILE__) . '/Model/GetServiceStatusRequest.php';
             $request = new MWSMerchantFulfillmentService_Model_GetServiceStatusRequest($request);
         }
         $parameters = $request->toQueryParameterArray();
         $parameters['Action'] = 'GetServiceStatus';
         $httpResponse = $this->_invoke($parameters);
 
-        require_once (dirname(__FILE__) . '/Model/GetServiceStatusResponse.php');
+        include_once dirname(__FILE__) . '/Model/GetServiceStatusResponse.php';
         $response = MWSMerchantFulfillmentService_Model_GetServiceStatusResponse::fromXML($httpResponse['ResponseBody']);
         $response->setResponseHeaderMetadata($httpResponse['ResponseHeaderMetadata']);
         return $response;
@@ -367,7 +378,8 @@ class FulfillmentClient implements FulfillmentInterface
     /**
      * Convert GetServiceStatusRequest to name value pairs
      */
-    private function _convertGetServiceStatus($request) {
+    private function _convertGetServiceStatus($request)
+    {
 
         $parameters = array();
         $parameters['Action'] = 'GetServiceStatus';
@@ -386,38 +398,37 @@ class FulfillmentClient implements FulfillmentInterface
     /**
      * Construct new Client
      *
-     * @param string $awsAccessKeyId AWS Access Key ID
+     * @param string $awsAccessKeyId     AWS Access Key ID
      * @param string $awsSecretAccessKey AWS Secret Access Key
-     * @param array $config configuration options.
-     * Valid configuration options are:
-     * <ul>
-     * <li>ServiceURL</li>
-     * <li>UserAgent</li>
-     * <li>SignatureVersion</li>
-     * <li>TimesRetryOnError</li>
-     * <li>ProxyHost</li>
-     * <li>ProxyPort</li>
-     * <li>ProxyUsername<li>
-     * <li>ProxyPassword<li>
-     * <li>MaxErrorRetry</li>
-     * </ul>
+     * @param array  $config             configuration options.
+     *                                   Valid configuration
+     *                                   options are: <ul>
+     *                                   <li>ServiceURL</li>
+     *                                   <li>UserAgent</li>
+     *                                   <li>SignatureVersion</li>
+     *                                   <li>TimesRetryOnError</li>
+     *                                   <li>ProxyHost</li>
+     *                                   <li>ProxyPort</li>
+     *                                   <li>ProxyUsername<li>
+     *                                   <li>ProxyPassword<li>
+     *                                   <li>MaxErrorRetry</li>
+     *                                   </ul>
+     * @param int $id
      */
-    public function __construct($awsAccessKeyId, $awsSecretAccessKey, $applicationName, $applicationVersion, $config = null)
-    {
-        iconv_set_encoding('output_encoding', 'UTF-8');
-        iconv_set_encoding('input_encoding', 'UTF-8');
-        iconv_set_encoding('internal_encoding', 'UTF-8');
-
-        $this->_awsAccessKeyId = $awsAccessKeyId;
-        $this->_awsSecretAccessKey = $awsSecretAccessKey;
-        if (!is_null($config)) $this->_config = array_merge($this->_config, $config);
-        $this->setUserAgentHeader($applicationName, $applicationVersion);
+    public function __construct($id) {
+        dd($id);
+//        $this->_awsAccessKeyId = $awsAccessKeyId;
+//        $this->_awsSecretAccessKey = $awsSecretAccessKey;
+//        if (!is_null($config)) { $this->_config = array_merge($this->_config, $config);
+//        }
+//        $this->setUserAgentHeader($applicationName, $applicationVersion);
     }
 
     private function setUserAgentHeader(
         $applicationName,
         $applicationVersion,
-        $attributes = null) {
+        $attributes = null
+    ) {
 
         if (is_null($attributes)) {
             $attributes = array ();
@@ -427,7 +438,8 @@ class FulfillmentClient implements FulfillmentInterface
             $this->constructUserAgentHeader($applicationName, $applicationVersion, $attributes);
     }
 
-    private function constructUserAgentHeader($applicationName, $applicationVersion, $attributes = null) {
+    private function constructUserAgentHeader($applicationName, $applicationVersion, $attributes = null)
+    {
         if (is_null($applicationName) || $applicationName === "") {
             throw new InvalidArgumentException('$applicationName cannot be null');
         }
@@ -464,22 +476,26 @@ class FulfillmentClient implements FulfillmentInterface
         return $userAgent;
     }
 
-   /**
-    * Collapse multiple whitespace characters into a single ' ' character.
-    * @param $s
-    * @return string
-    */
-   private function collapseWhitespace($s) {
-       return preg_replace('/ {2,}|\s/', ' ', $s);
-   }
+    /**
+     * Collapse multiple whitespace characters into a single ' ' character.
+     *
+     * @param  $s
+     * @return string
+     */
+    private function collapseWhitespace($s)
+    {
+        return preg_replace('/ {2,}|\s/', ' ', $s);
+    }
 
     /**
      * Collapse multiple whitespace characters into a single ' ' and backslash escape '\',
      * and '/' characters from a string.
-     * @param $s
+     *
+     * @param  $s
      * @return string
      */
-    private function quoteApplicationName($s) {
+    private function quoteApplicationName($s)
+    {
         $quotedString = $this->collapseWhitespace($s);
         $quotedString = preg_replace('/\\\\/', '\\\\\\\\', $quotedString);
         $quotedString = preg_replace('/\//', '\\/', $quotedString);
@@ -491,10 +507,11 @@ class FulfillmentClient implements FulfillmentInterface
      * Collapse multiple whitespace characters into a single ' ' and backslash escape '\',
      * and '(' characters from a string.
      *
-     * @param $s
+     * @param  $s
      * @return string
      */
-    private function quoteApplicationVersion($s) {
+    private function quoteApplicationVersion($s)
+    {
         $quotedString = $this->collapseWhitespace($s);
         $quotedString = preg_replace('/\\\\/', '\\\\\\\\', $quotedString);
         $quotedString = preg_replace('/\\(/', '\\(', $quotedString);
@@ -506,10 +523,11 @@ class FulfillmentClient implements FulfillmentInterface
      * Collapse multiple whitespace characters into a single ' ' and backslash escape '\',
      * and '=' characters from a string.
      *
-     * @param $s
+     * @param  $s
      * @return unknown_type
      */
-    private function quoteAttributeName($s) {
+    private function quoteAttributeName($s)
+    {
         $quotedString = $this->collapseWhitespace($s);
         $quotedString = preg_replace('/\\\\/', '\\\\\\\\', $quotedString);
         $quotedString = preg_replace('/\\=/', '\\=', $quotedString);
@@ -521,10 +539,11 @@ class FulfillmentClient implements FulfillmentInterface
      * Collapse multiple whitespace characters into a single ' ' and backslash escape ';', '\',
      * and ')' characters from a string.
      *
-     * @param $s
+     * @param  $s
      * @return unknown_type
      */
-    private function quoteAttributeValue($s) {
+    private function quoteAttributeValue($s)
+    {
         $quotedString = $this->collapseWhitespace($s);
         $quotedString = preg_replace('/\\\\/', '\\\\\\\\', $quotedString);
         $quotedString = preg_replace('/\\;/', '\\;', $quotedString);
@@ -543,10 +562,11 @@ class FulfillmentClient implements FulfillmentInterface
     {
         try {
             if (empty($this->_config['ServiceURL'])) {
-                require_once(dirname(__FILE__) . '/FulfillmentException.php');
+                include_once dirname(__FILE__) . '/FulfillmentException.php';
                 throw new FulfillmentException(
                     array ('ErrorCode' => 'InvalidServiceURL',
-                           'Message' => "Missing serviceUrl configuration value. You may obtain a list of valid MWS URLs by consulting the MWS Developer's Guide, or reviewing the sample code published along side this library."));
+                    'Message' => "Missing serviceUrl configuration value. You may obtain a list of valid MWS URLs by consulting the MWS Developer's Guide, or reviewing the sample code published along side this library.")
+                );
             }
             $parameters = $this->_addRequiredParameters($parameters);
             $retries = 0;
@@ -560,13 +580,15 @@ class FulfillmentClient implements FulfillmentInterface
                 if ($status == 500 && $this->_pauseOnRetry(++$retries)) {
                     continue;
                 }
-                throw $this->_reportAnyErrors($response['ResponseBody'],
-                    $status, $response['ResponseHeaderMetadata']);
+                throw $this->_reportAnyErrors(
+                    $response['ResponseBody'],
+                    $status, $response['ResponseHeaderMetadata']
+                );
             }
         } catch (FulfillmentException $se) {
             throw $se;
         } catch (Exception $t) {
-            require_once(dirname(__FILE__) . '/FulfillmentException.php');
+            include_once dirname(__FILE__) . '/FulfillmentException.php';
             throw new FulfillmentException(array('Exception' => $t, 'Message' => $t->getMessage()));
         }
     }
@@ -593,7 +615,7 @@ class FulfillmentClient implements FulfillmentInterface
             $exProps["Message"] = "Internal Error";
         }
 
-        require_once(dirname(__FILE__) . '/FulfillmentException.php');
+        include_once dirname(__FILE__) . '/FulfillmentException.php';
         return new FulfillmentException($exProps);
     }
 
@@ -601,26 +623,25 @@ class FulfillmentClient implements FulfillmentInterface
 
     /**
      * Perform HTTP post with exponential retries on error 500 and 503
-     *
      */
     private function _httpPost(array $parameters)
     {
         $config = $this->_config;
         $query = $this->_getParametersAsString($parameters);
-        $url = parse_url ($config['ServiceURL']);
+        $url = parse_url($config['ServiceURL']);
         $uri = array_key_exists('path', $url) ? $url['path'] : null;
-        if (!isset ($uri)) {
+        if (!isset($uri)) {
                 $uri = "/";
         }
 
         switch ($url['scheme']) {
-            case 'https':
-                $scheme = 'https://';
-                $port = isset($url['port']) ? $url['port'] : 443;
-                break;
-            default:
-                $scheme = 'http://';
-                $port = isset($url['port']) ? $url['port'] : 80;
+        case 'https':
+            $scheme = 'https://';
+            $port = isset($url['port']) ? $url['port'] : 443;
+            break;
+        default:
+            $scheme = 'http://';
+            $port = isset($url['port']) ? $url['port'] : 80;
         }
 
         $allHeaders = $config['Headers'];
@@ -645,12 +666,10 @@ class FulfillmentClient implements FulfillmentInterface
         curl_setopt($ch, CURLOPT_HTTPHEADER, $allHeadersStr);
         curl_setopt($ch, CURLOPT_HEADER, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        if ($config['ProxyHost'] != null && $config['ProxyPort'] != -1)
-        {
+        if ($config['ProxyHost'] != null && $config['ProxyPort'] != -1) {
             curl_setopt($ch, CURLOPT_PROXY, $config['ProxyHost'] . ':' . $config['ProxyPort']);
         }
-        if ($config['ProxyUsername'] != null && $config['ProxyPassword'] != null)
-        {
+        if ($config['ProxyUsername'] != null && $config['ProxyPassword'] != null) {
             curl_setopt($ch, CURLOPT_PROXYUSERPWD, $config['ProxyUsername'] . ':' . $config['ProxyPassword']);
         }
 
@@ -658,7 +677,7 @@ class FulfillmentClient implements FulfillmentInterface
         $response = curl_exec($ch);
 
         if($response === false) {
-            require_once(dirname(__FILE__) . '/FulfillmentException.php');
+            include_once dirname(__FILE__) . '/FulfillmentException.php';
             $exProps["Message"] = curl_error($ch);
             $exProps["ErrorType"] = "HTTP";
             curl_close($ch);
@@ -688,7 +707,8 @@ class FulfillmentClient implements FulfillmentInterface
      *
      * return [status, body, ResponseHeaderMetadata]
      */
-    private function _extractHeadersAndBody($response){
+    private function _extractHeadersAndBody($response)
+    {
         //First split by 2 'CRLF'
         $responseComponents = preg_split("/(?:\r?\n){2}/", $response, 2);
         $body = null;
@@ -699,8 +719,9 @@ class FulfillmentClient implements FulfillmentInterface
             $headers = $responseComponents[$count];
             $responseStatus = $this->_extractHttpStatusCode($headers);
 
-            if($responseStatus != null &&
-                    $this->_httpHeadersHaveContent($headers)){
+            if($responseStatus != null
+                && $this->_httpHeadersHaveContent($headers)
+            ) {
 
                 $responseHeaderMetadata = $this->_extractResponseHeaderMetadata($headers);
                 //The body will be the next item in the responseComponents array
@@ -709,8 +730,8 @@ class FulfillmentClient implements FulfillmentInterface
         }
 
         //If the body is null here then we were unable to parse the response and will throw an exception
-        if($body == null){
-            require_once(dirname(__FILE__) . '/FulfillmentException.php');
+        if($body == null) {
+            include_once dirname(__FILE__) . '/FulfillmentException.php';
             $exProps["Message"] = "Failed to parse valid HTTP response (" . $response . ")";
             $exProps["ErrorType"] = "HTTP";
             throw new FulfillmentException($exProps);
@@ -730,10 +751,11 @@ class FulfillmentClient implements FulfillmentInterface
      * ...
      * returns String statusCode or null if the status line can't be parsed
      */
-    private function _extractHttpStatusCode($headers){
-    	$statusCode = null;
+    private function _extractHttpStatusCode($headers)
+    {
+        $statusCode = null;
         if (1 === preg_match("/(\\S+) +(\\d+) +([^\n\r]+)(?:\r?\n|\r)/", $headers, $matches)) {
-        	//The matches array [entireMatchString, protocol, statusCode, the rest]
+            //The matches array [entireMatchString, protocol, statusCode, the rest]
             $statusCode = $matches[2];
         }
         return $statusCode;
@@ -744,15 +766,17 @@ class FulfillmentClient implements FulfillmentInterface
      * has content.  In this case
      * return true if there is a valid "Content-Length" or "Transfer-Encoding" header
      */
-    private function _httpHeadersHaveContent($headers){
+    private function _httpHeadersHaveContent($headers)
+    {
         return (1 === preg_match("/[cC]ontent-[lL]ength: +(?:\\d+)(?:\\r?\\n|\\r|$)/", $headers) ||
                 1 === preg_match("/Transfer-Encoding: +(?!identity[\r\n;= ])(?:[^\r\n]+)(?:\r?\n|\r|$)/i", $headers));
     }
 
     /**
-    *  extract a ResponseHeaderMetadata object from the raw headers
-    */
-    private function _extractResponseHeaderMetadata($rawHeaders){
+     *  extract a ResponseHeaderMetadata object from the raw headers
+     */
+    private function _extractResponseHeaderMetadata($rawHeaders)
+    {
         $inputHeaders = preg_split("/\r\n|\n|\r/", $rawHeaders);
         $headers = array();
         $headers['x-mws-request-id'] = null;
@@ -763,7 +787,7 @@ class FulfillmentClient implements FulfillmentInterface
         $headers['x-mws-quota-resetsOn'] = null;
 
         foreach ($inputHeaders as $currentHeader) {
-            $keyValue = explode (': ', $currentHeader);
+            $keyValue = explode(': ', $currentHeader);
             if (isset($keyValue[1])) {
                 list ($key, $value) = $keyValue;
                 if (isset($headers[$key]) && $headers[$key]!==null) {
@@ -774,21 +798,24 @@ class FulfillmentClient implements FulfillmentInterface
             }
         }
 
-        require_once(dirname(__FILE__) . '/Model/ResponseHeaderMetadata.php');
+        include_once dirname(__FILE__) . '/Model/ResponseHeaderMetadata.php';
         return new MWSMerchantFulfillmentService_Model_ResponseHeaderMetadata(
-          $headers['x-mws-request-id'],
-          $headers['x-mws-response-context'],
-          $headers['x-mws-timestamp'],
-          $headers['x-mws-quota-max'],
-          $headers['x-mws-quota-remaining'],
-          $headers['x-mws-quota-resetsOn']);
+            $headers['x-mws-request-id'],
+            $headers['x-mws-response-context'],
+            $headers['x-mws-timestamp'],
+            $headers['x-mws-quota-max'],
+            $headers['x-mws-quota-remaining'],
+            $headers['x-mws-quota-resetsOn']
+        );
     }
 
     /**
      * Set curl options relating to SSL. Protected to allow overriding.
+     *
      * @param $ch curl handle
      */
-    protected function setSSLCurlOptions($ch) {
+    protected function setSSLCurlOptions($ch)
+    {
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
     }
@@ -866,9 +893,9 @@ class FulfillmentClient implements FulfillmentInterface
      *       Parameter names are separated from their values by the '=' character
      *       (ASCII character 61), even if the value is empty.
      *       Pairs of parameter and values are separated by the '&' character (ASCII code 38).
-     *
      */
-    private function _signParameters(array $parameters, $key) {
+    private function _signParameters(array $parameters, $key)
+    {
         $signatureVersion = $parameters['SignatureVersion'];
         $algorithm = "HmacSHA1";
         $stringToSign = null;
@@ -884,17 +911,19 @@ class FulfillmentClient implements FulfillmentInterface
 
     /**
      * Calculate String to Sign for SignatureVersion 2
-     * @param array $parameters request parameters
+     *
+     * @param  array $parameters request parameters
      * @return String to Sign
      */
-    private function _calculateStringToSignV2(array $parameters) {
+    private function _calculateStringToSignV2(array $parameters)
+    {
         $data = 'POST';
         $data .= "\n";
-        $endpoint = parse_url ($this->_config['ServiceURL']);
+        $endpoint = parse_url($this->_config['ServiceURL']);
         $data .= $endpoint['host'];
         $data .= "\n";
         $uri = array_key_exists('path', $endpoint) ? $endpoint['path'] : null;
-        if (!isset ($uri)) {
+        if (!isset($uri)) {
             $uri = "/";
         }
         $uriencoded = implode("/", array_map(array($this, "_urlencode"), explode("/", $uri)));
@@ -905,7 +934,8 @@ class FulfillmentClient implements FulfillmentInterface
         return $data;
     }
 
-    private function _urlencode($value) {
+    private function _urlencode($value)
+    {
         return str_replace('%7E', '~', rawurlencode($value));
     }
 
@@ -920,7 +950,7 @@ class FulfillmentClient implements FulfillmentInterface
         } else if ($algorithm === 'HmacSHA256') {
             $hash = 'sha256';
         } else {
-            throw new Exception ("Non-supported signing method specified");
+            throw new Exception("Non-supported signing method specified");
         }
         return base64_encode(
             hash_hmac($hash, $data, $key, true)
